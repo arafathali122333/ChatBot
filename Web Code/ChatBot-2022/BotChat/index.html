@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ChatBot</title>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/loader.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/Checker.js"></script>
+</head>
+
+<body>
+    <div id="preloader" style="background: linear-gradient(135deg, #71b7e6, #9b59b6);">
+        <div id="loader"></div>
+    </div>
+    <div class="wrapper" style="display:none;">
+        <div class="nav">
+            <div class="logo">
+                <img src="/img/logobot.gif" width="40" height="40">
+                <h4>ChatBot</h4>
+            </div>
+            <div class="links">
+                <a href="/Discussion/index.html"><b class="titlehover">Discussions</b></a>
+                <a href="/Private Chat/pages/home.html"><b class="titlehover">ChatRoom</b></a>
+                <a><b style="color:red; cursor:pointer;" onclick="signOut()">LogOut</b></a>
+            </div>
+        </div>
+        <div class="imagebg">
+            <div class="landing">
+                <div class="landingText" data-aos="fade-up" data-aos-duration="1300">
+                    <h1 class="typed-out"><i class="fa fa-group" style="color:rgb(19, 187, 164);"></i>&ensp;ChatBot Meet</h1>
+                    <h4 style="color:rgb(26, 26, 97);">Online Counselling Therapy With Psychologists Anytime, Anywhere, Any device. Connect with the best in class specialists over video sessions.</h4>
+                    <br>
+                    <a href="/Chatmeet/index.html" class="btn" style="color:white;">Try it</a>
+                </div>
+                <div class="landingImage" data-aos="fade-down" data-aos-duration="2000">
+                    <img src="/img/1.gif" alt="">
+                </div>
+            </div>
+            <div class="footer">
+                <div style="font-size:200%;"> <a href="https://api.whatsapp.com/send?phone=919500852596" target="_blank"><i class="fa fa-whatsapp" style="color:green; padding-bottom:6px;"></i></a>&ensp;
+                    <a href="mailto:happielife2022@gmail.com" target="_blank"><i class="fa fa-envelope" style="color:#c5221c;"></i></a>&ensp;
+                    <a href="https://in.linkedin.com/in/arafathali-m" target="_blank"><i class="fa fa-linkedin-square" style="color:#0961b8;"></i></a>
+                </div>
+                <div><b>© ChatBot - 2022</b></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        firebase.database().ref('users').on('value', (snapshot) => {
+            let UID = firebase.auth().currentUser.uid;
+            localStorage.setItem('Current_userID', JSON.stringify(UID));
+            localStorage.setItem('Current_user', JSON.stringify(snapshot.val()[UID]));
+            currentuserid = localStorage.getItem(`Current_userID`)
+            currentuserid = JSON.parse(currentuserid)
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementsByClassName('wrapper')[0].style.display = 'block';
+        });
+    </script>
+    <script src="/notify.js"></script>
+    <script src="/signout.js"></script>
+    <script src="Bot.js"></script>
+    <script src="aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

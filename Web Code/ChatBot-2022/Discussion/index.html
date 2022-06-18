@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ChatBot</title>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/Private Chat/css/spin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/Checker.js"></script>
+</head>
+
+<body>
+
+    <section class="msger">
+        <header class="msger-header">
+
+            <div style="font-size:150%; color:white;">
+                <b>😉&ensp;Discussion &ensp;</b>
+            </div>
+
+            <div>
+                <a href="/BotChat/index.html" class="titlecontent"><b>ChatBot</b></a>&ensp;&ensp;
+                <span class="titlecontent" style="color:red; font-size:120%; cursor:pointer;" onclick="signOut()"><b>Logout</b></span>&ensp;
+            </div>
+
+        </header>
+
+        <main class="msger-chat">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </main>
+
+        <div class="msger-inputarea">
+            <input type="text" class="msger-input" placeholder="Enter your message...">
+            <span class="msger-send-btn" onclick="msg(event)"><i class="fa fa-send-o"></i></span>
+        </div>
+
+    </section>
+    <script src="script.js"></script>
+    <script src="/signout.js"></script>
+    <script src="/notifyd.js"></script>
+</body>
+
+</html>

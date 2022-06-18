@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Response</title>
+
+    <style>
+        input[type=text],
+        select,
+        #lname {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        #btn,
+        #btn2 {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        #btn:hover {
+            background-color: #45a049;
+        }
+        
+        div {
+            padding: 20px;
+        }
+        
+        h1 {
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Please Submit your Response...</h1>
+
+    <div>
+
+        <label for="fname">User UID:</label>
+        <input type="text" id="fname" name="firstname" placeholder="Enter the user UID Correctly..">
+
+        <label for="lname">Time Slot:</label>
+        <input type="datetime-local" id="lname">
+
+        <button id="btn" onclick="submit()">Check</button>
+        <button id="btn2" style="display:none" onclick="Update()">Submit</button>
+
+    </div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyADxqHtdT-9u3Ay3shemAcjrM4UlLAwgK4",
+            authDomain: "chatbot-5eb90.firebaseapp.com",
+            databaseURL: "https://chatbot-5eb90-default-rtdb.firebaseio.com",
+            projectId: "chatbot-5eb90",
+            storageBucket: "chatbot-5eb90.appspot.com",
+            messagingSenderId: "717612038808",
+            appId: "1:717612038808:web:036a0549f46c672d462eed"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+
+        function submit() {
+            document.getElementById("btn").innerHTML = "Please Wait...";
+            let slot = document.getElementById("lname").value,
+                userId = document.getElementById("fname").value,
+                KO, TsS;
+
+            if (slot != "" && userId != "") {
+                firebase.database().ref('MeetingSchedule/' + userId).get().then((snapshot) => {
+                    if (snapshot.exists()) {
+                        KO = snapshot.val().Request;
+                        TsS = snapshot.val().TimeSlot;
+                        if (TsS !== undefined) {
+                            window.alert("You are already scheduled the meet!");
+                            document.getElementById("btn").innerHTML = "Check";
+                            return;
+                        }
+                        if (KO === undefined) {
+                            window.alert("This user cancelled the Meeting");
+                            document.getElementById("btn").innerHTML = "Check";
+                            document.getElementById("lname").value = "";
+                            document.getElementById("fname").value = "";
+                            return;
+                        } else if (KO !== undefined) {
+                            document.getElementById("btn").style.display = "none";
+                            document.getElementById("btn2").style.display = "block";
+                            return;
+                        }
+                    }
+                });
+            } else {
+                window.alert("Please Enter the Details Correctly...");
+                document.getElementById("btn").innerHTML = "Check";
+                return;
+            }
+        }
+
+        function Update() {
+            document.getElementById("btn2").innerHTML = "Please Wait...";
+            let slot = document.getElementById("lname").value,
+                userId = document.getElementById("fname").value;
+            firebase.database().ref('MeetingSchedule/' + userId).update({
+                TimeSlot: slot,
+            }).then(function() {
+                window.alert("Your Response has been Submitted...");
+                location.reload();
+            }).catch(function() {
+                document.getElementById("btn2").innerHTML = "Submit";
+            });
+        }
+    </script>
+</body>
+
+</html>

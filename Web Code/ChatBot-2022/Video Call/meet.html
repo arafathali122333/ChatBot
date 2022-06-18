@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ChatBot Meet</title>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/Checker.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 style="text-align:center; color:rgb(187, 213, 188);"> <i class="fa fa-group" style="color:rgb(19, 187, 164);"></i> ChatBot Meet</h1>
+    </header>
+
+    <div id="stream-wrapper">
+        <div id="video-streams"></div>
+
+        <div id="stream-controls">
+            <button id="camera-btn" style="border-radius:50%;margin-left:10px; border:none; padding:10px 10px 5px 10px; font-size:150%; color:black; background-color:#0bd4f7; cursor:pointer;"><span class="iconify" data-icon="mdi:camera-off"></span></button>
+            <button id="mic-btn" style="border-radius:50%;margin-left:10px; border:none; padding:10px 15px 10px 15px; font-size:120%; color:blacks; background-color:#0bd4f7; cursor:pointer;"><i class='fa fa-microphone-slash'></i></button>
+            <button id="leave-btn" style="border-radius:50%;margin-left:10px; border:none; padding:10px 10px 10px 15px; font-size:120%; color:red; background-color:#0bd4f7; cursor:pointer;" title="Leave this Meet"> <i class="fa fa-sign-out "></i></button>
+        </div>
+    </div>
+
+</body>
+<script>
+    var _0xa39a = ["\x76\x61\x6C\x75\x65", "\x75\x69\x64", "\x63\x75\x72\x72\x65\x6E\x74\x55\x73\x65\x72", "\x61\x75\x74\x68", "\x76\x61\x6C", "\x2F\x43\x68\x65\x63\x6B\x6F\x75\x74\x2F\x69\x6E\x64\x65\x78\x2E\x68\x74\x6D\x6C", "\x5F\x73\x65\x6C\x66", "\x6F\x70\x65\x6E", "\x6F\x6E", "\x4D\x65\x65\x74\x69\x6E\x67\x53\x63\x68\x65\x64\x75\x6C\x65", "\x72\x65\x66", "\x64\x61\x74\x61\x62\x61\x73\x65"];
+    firebase[_0xa39a[11]]()[_0xa39a[10]](_0xa39a[9])[_0xa39a[8]](_0xa39a[0], (_0x3202x1) => {
+        let _0x3202x2 = firebase[_0xa39a[3]]()[_0xa39a[2]][_0xa39a[1]];
+        if (_0x3202x1[_0xa39a[4]]()[_0x3202x2] === undefined) {
+            window[_0xa39a[7]](_0xa39a[5], _0xa39a[6])
+        }
+    });
+</script>
+<script src="/notify.js"></script>
+<script src="AgoraRTC_N-4.7.3.js "></script>
+<script src='main.js'></script>
+
+</html>

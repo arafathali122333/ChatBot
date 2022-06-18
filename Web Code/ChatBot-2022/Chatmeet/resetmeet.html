@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot Meet</title>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/Checker.js"></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat');
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        background-color: #28223F;
+        font-family: Montserrat, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+    }
+    
+    #rbtn {
+        padding: 4px 18px;
+    }
+    
+    #Btn {
+        background-color: #4903ed;
+        border: 1px solid #4903ed;
+        border-radius: 10px;
+        color: white;
+        font-family: Montserrat, sans-serif;
+        font-weight: bold;
+        padding: 10px 25px;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div class="card-container" style="background-color: #231E39;
+    border-radius: 5px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+    color: #B3B8CD;
+    padding-top: 30px;
+    position: relative;
+    width: 350px;
+    max-width: 100%;">
+        <div style="display:flex; justify-content:center; justify-content:space-around; padding-bottom:5%;">
+            <div style="font-size:200%;" title="ChatBot Home"><a href="/BotChat/index.html" style="color:rgb(236, 32, 230);"><i class="fa fa-home"></i></a></div>
+            <div style="font-size:170%;" title="ChatBot Meet"><a href="/Chatmeet/index.html" style="color:rgb(19, 187, 164);"><i class="fa fa-group"></i></a></div>
+            <div><b style="color:red;font-size:200%; cursor:pointer;" title="Sign Out" onclick="signOut()"><i class="fa fa-sign-out"></i></b></div>
+        </div>
+        <div style="padding:4px 22px"><b>Reason?</b></div>
+        <div id="rbtn"><input type="radio" id="html" name="fav_language" value="HTML"> <label for="html">We are finished ChatBot Meeting </label></div>
+        <div id="rbtn"><input type="radio" id="css" name="fav_language" value="CSS"> <label for="css">I am Busy for Given Timeslot</label></div>
+        <div id="rbtn"><input type="radio" id="javascript" name="fav_language" value="JavaScript"> <label for="javascript">I want to meet another Therapy</label></div>
+        <div id="rbtn" class="Checker"><input type="radio" id="Ot" name="fav_language" value="JavaScript"> <label for="Ot">Other Reason:</label></div>
+        <div style="padding:4px 43px; display:none;" id="TA"><textarea style="width:100%; height:80px;" id="TAt"></textarea></div>
+        <div style="text-align:center;"><button id="Btn" onclick="Resetmeet()">Submit</button></div>
+        <br>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("UsS2gl3sw0NSSWfNI");
+        })();
+    </script>
+    <script>
+        var _0xa39a = ["\x76\x61\x6C\x75\x65", "\x75\x69\x64", "\x63\x75\x72\x72\x65\x6E\x74\x55\x73\x65\x72", "\x61\x75\x74\x68", "\x76\x61\x6C", "\x2F\x43\x68\x65\x63\x6B\x6F\x75\x74\x2F\x69\x6E\x64\x65\x78\x2E\x68\x74\x6D\x6C", "\x5F\x73\x65\x6C\x66", "\x6F\x70\x65\x6E", "\x6F\x6E", "\x4D\x65\x65\x74\x69\x6E\x67\x53\x63\x68\x65\x64\x75\x6C\x65", "\x72\x65\x66", "\x64\x61\x74\x61\x62\x61\x73\x65"];
+        firebase[_0xa39a[11]]()[_0xa39a[10]](_0xa39a[9])[_0xa39a[8]](_0xa39a[0], (_0x3202x1) => {
+            let _0x3202x2 = firebase[_0xa39a[3]]()[_0xa39a[2]][_0xa39a[1]];
+            if (_0x3202x1[_0xa39a[4]]()[_0x3202x2] === undefined) {
+                window[_0xa39a[7]](_0xa39a[5], _0xa39a[6])
+            }
+        })
+        let Uid, l, k, userName, user_Email, T_Email;
+
+        firebase.database().ref().on('value', (snapshot) => {
+            Uid = firebase.auth().currentUser.uid;
+            userName = snapshot.val().users[Uid].Full_Name;
+            user_Email = snapshot.val().users[Uid].E_Mail;
+            T_Email = snapshot.val().MeetingSchedule[Uid].T_Email;
+            l = 0;
+        })
+
+        document.addEventListener("click", function(e) {
+            if (document.getElementById('Ot').checked) {
+                document.getElementById('TA').style.display = "block";
+            } else {
+                document.getElementById('TA').style.display = "none";
+            }
+        });
+
+        function Resetmeet() {
+            document.getElementById('Btn').innerHTML = "Please Wait";
+            if (document.getElementById('html').checked) {
+                k = "We are finished ChatBot Meeting";
+            }
+            if (document.getElementById('css').checked) {
+                k = "I am Busy for Given Timeslot";
+            }
+            if (document.getElementById('javascript').checked) {
+                k = "I want to meet another Therapy";
+            }
+            if (document.getElementById('Ot').checked) {
+                k = document.getElementById('TAt').value;
+            }
+            if ((k == "") || (k === undefined)) {
+                window.alert("Please Say Your Reason");
+                document.getElementById('Btn').innerHTML = "Submit";
+                return;
+            }
+            if (l === undefined) {
+                window.alert("Slow Network...So don't Submit the too quickly");
+                document.getElementById('Btn').innerHTML = "Submit";
+                return;
+            }
+            firebase.database().ref('MeetingSchedule/' + Uid).update({
+                Feedback: k,
+            }).then(function() {
+                firebase.database().ref('MeetingSchedule/' + Uid + "/Request").remove();
+                firebase.database().ref('MeetingSchedule/' + Uid + "/TimeSlot").remove();
+                if (k !== "We are finished ChatBot Meeting") {
+                    sendMail();
+                }
+                if (k === "We are finished ChatBot Meeting") {
+                    window.open("index.html", "_self");
+                }
+            }).catch(function() {
+                document.getElementById('Btn').innerHTML = "Submit";
+            })
+        }
+
+        function sendMail(params) {
+            var tempParams = {
+                from_name: userName,
+                uid: Uid,
+                ue: user_Email,
+                to_email: T_Email,
+                Reason: k,
+            };
+
+            emailjs.send('service_oxqlh9h', 'template_0k64rel', tempParams)
+                .then(function(res) {
+                    console.log("success", res.status);
+                    window.open("index.html", "_self");
+                }).catch(function() {
+                    document.getElementById('Btn').innerHTML = "Submit";
+                })
+        }
+    </script>
+    <script src="/notify.js"></script>
+    <script src="/signout.js"></script>
+</body>
+
+</html>

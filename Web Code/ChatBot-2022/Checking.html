@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ChatBot</title>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="loader.css">
+</head>
+
+<body>
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/api.js"></script>
+    <script>
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user !== null) {
+                if (user.emailVerified) {
+                    window.open("/BotChat/index.html", "_self");
+                } else {
+                    alert("Hey User Email id:" + user.email + " isn't verified! Please check your mail and click verification link");
+                    firebase.auth().signOut().then(function() {
+                        window.open("/LogIn.html", "_self");
+                    });
+                }
+            } else {
+                window.open("/LogIn.html", "_self");
+            }
+        });
+    </script>
+</body>
+
+</html>

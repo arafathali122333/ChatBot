@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ChatBot Meet</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+
+<body>
+    <header>
+        <h1 style="text-align:center; color:rgb(187, 213, 188);"> <i class="fa fa-group" style="color:rgb(19, 187, 164);"></i> ChatBot Meet</h1>
+    </header>
+
+    <div id="stream-wrapper">
+        <div id="video-streams"></div>
+
+        <div id="stream-controls">
+            <button id="camera-btn" style="border-radius:50%;margin-left:10px; border:none; padding:10px 10px 5px 10px; font-size:150%; color:black; background-color:#0bd4f7; cursor:pointer;"><span class="iconify" data-icon="mdi:camera-off"></span></button>
+            <button id="mic-btn" style="border-radius:50%;margin-left:10px; border:none; padding:10px 15px 10px 15px; font-size:120%; color:blacks; background-color:#0bd4f7; cursor:pointer;"><i class='fa fa-microphone-slash'></i></button>
+            <button id="leave-btn" style="border-radius:50%;margin-left:10px; border:none; padding:10px 10px 10px 15px; font-size:120%; color:red; background-color:#0bd4f7; cursor:pointer;" title="Leave this Meet"> <i class="fa fa-sign-out "></i></button>
+        </div>
+    </div>
+
+</body>
+<script src="AgoraRTC_N-4.7.3.js "></script>
+<script src='main.js'></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+<script src="/api.js"></script>
+<script src="/notify.js"></script>
+
+</html>

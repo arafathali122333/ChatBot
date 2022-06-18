@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ChatBot</title>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/Chatmeet/style.css">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/Checker.js"></script>
+    <script>
+        var _0xa39a = ["\x76\x61\x6C\x75\x65", "\x75\x69\x64", "\x63\x75\x72\x72\x65\x6E\x74\x55\x73\x65\x72", "\x61\x75\x74\x68", "\x76\x61\x6C", "\x2F\x43\x68\x65\x63\x6B\x6F\x75\x74\x2F\x69\x6E\x64\x65\x78\x2E\x68\x74\x6D\x6C", "\x5F\x73\x65\x6C\x66", "\x6F\x70\x65\x6E", "\x6F\x6E", "\x4D\x65\x65\x74\x69\x6E\x67\x53\x63\x68\x65\x64\x75\x6C\x65", "\x72\x65\x66", "\x64\x61\x74\x61\x62\x61\x73\x65"];
+        firebase[_0xa39a[11]]()[_0xa39a[10]](_0xa39a[9])[_0xa39a[8]](_0xa39a[0], (_0x3202x1) => {
+            let _0x3202x2 = firebase[_0xa39a[3]]()[_0xa39a[2]][_0xa39a[1]];
+            if (_0x3202x1[_0xa39a[4]]()[_0x3202x2] !== undefined) {
+                var _0x2185 = ["\x2F\x43\x68\x61\x74\x6D\x65\x65\x74\x2F\x69\x6E\x64\x65\x78\x2E\x68\x74\x6D\x6C", "\x5F\x73\x65\x6C\x66", "\x6F\x70\x65\x6E"];
+                window[_0x2185[2]](_0x2185[0], _0x2185[1])
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <div class="card-container">
+        <div style="font-size:200%; letter-spacing:2px;"><b>ChatBot</b></div><br>
+        <button class="primary" id="btn1">Try to Pay</button><br><br>
+        <button class="primary" id="btn2">Pay Later</button>
+        <br><br><br>
+    </div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        function payment() {
+            var options = {
+                "key": "rzp_test_AZPfIAywaXqDOi",
+                "amount": 999 * 100,
+                "currency": "INR",
+                "name": "ChatBot",
+                "description": "Access ChatBot Meet & ChatRoom",
+                "image": "/img/logo.png",
+                "handler": function(response) {
+                    firebase.database().ref().on('value', (snapshot) => {
+                        let UIDDD = firebase.auth().currentUser.uid;
+                        firebase.database().ref('MeetingSchedule/' + UIDDD).update({
+                            Payment: "Success",
+                        })
+                    });
+                },
+                "theme": {
+                    "color": "#9932CC"
+                }
+            }
+            var propay = new Razorpay(options);
+            propay.on('payment.failed', function(response) {
+                alert(response.error.description);
+                alert("Something went Wrong! Please Try Again...");
+            });
+            propay.open();
+        }
+
+        function afterpay() {
+            window.open("/BotChat/index.html", "_self");
+        }
+        payment();
+        document.getElementById("btn1").addEventListener("click", payment);
+        document.getElementById("btn2").addEventListener("click", afterpay);
+    </script>
+    <script src="/notify.js"></script>
+</body>
+
+</html>

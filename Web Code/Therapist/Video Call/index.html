@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot Meet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat');
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        background-color: #28223F;
+        font-family: Montserrat, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+    }
+    
+    h3 {
+        margin: 7px 0;
+    }
+    
+    .card-container {
+        background-color: #231E39;
+        border-radius: 5px;
+        box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+        color: #B3B8CD;
+        padding-top: 30px;
+        position: relative;
+        width: 350px;
+        max-width: 100%;
+    }
+    
+    button.primary {
+        background-color: #4903ed;
+        border: 1px solid #4903ed;
+        border-radius: 10px;
+        color: white;
+        font-family: Montserrat, sans-serif;
+        font-weight: bold;
+        padding: 10px 25px;
+        cursor: pointer;
+    }
+    
+    .upad {
+        margin: 0px 24px;
+        padding: 8px 0px;
+    }
+</style>
+
+<body>
+
+    <div class="card-container">
+        <div style="padding-bottom:3%; font-size:170%;text-align: center;"><i class="fa fa-group" style="color:rgb(19, 187, 164);"></i> <b>ChatBot Meet</b></div>
+        <h3 class="upad">UID:</h3><input type="text" style="width:85%; font-size:120%; margin:0px 24px;" id="UID">
+        <br>
+        <br>
+        <div style="text-align: center;"><button class="primary" id="joinbutn" onclick="Verify()">Join</button></div>
+        <br>
+        <div style="text-align: center;"><a href="/home.html"><button class="primary" style="font-size:110%;"><i class="fa fa-home"></i></button></a></div>
+        <br>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/api.js"></script>
+    <script>
+        function Verify() {
+            let Uid = document.getElementById("UID").value,
+                R, TS;
+            if (Uid == "") {
+                alert("Please Fill...");
+                return;
+            }
+            document.getElementById("joinbutn").innerHTML = "Please Wait...";
+            firebase.database().ref('MeetingSchedule/' + Uid).on('value', (snapshot) => {
+                R = snapshot.val().Request;
+                TS = snapshot.val().TimeSlot;
+                console.log(R, TS);
+                if (R === undefined) {
+                    window.alert("This user cancel your meet (or) didn't request to you...");
+                    document.getElementById("joinbutn").innerHTML = "Join";
+                }
+                if (R !== undefined && TS === undefined) {
+                    window.alert("Please give TimeSlot this user");
+                    document.getElementById("joinbutn").innerHTML = "Join";
+                }
+                if (R !== undefined && TS !== undefined) {
+                    window.open("meet.html", "_self");
+                }
+            });
+        }
+        if (localStorage.getItem("MeetId") === null) {
+            window.open("/index.html", "_self");
+        }
+    </script>
+    <script src="/notify.js"></script>
+</body>
+
+</html>

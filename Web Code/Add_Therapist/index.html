@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Response</title>
+
+    <style>
+        input[type=text],
+        input[type=email],
+        select,
+        #lname {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        #btn,
+        #btn2 {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        #btn:hover {
+            background-color: #45a049;
+        }
+        
+        div {
+            padding: 20px;
+        }
+        
+        h1 {
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Please Submit your Response...</h1>
+
+    <div>
+
+        <label for="fname">Your Name:</label>
+        <input type="text" id="f1" placeholder="Enter Your Name..">
+
+        <label for="lname">City:</label>
+        <input type="text" id="f2" placeholder="Enter Your City..">
+
+        <label for="lname">About:</label>
+        <input type="text" id="f3" placeholder="Please about yourself shortly...">
+
+        <label for="lname">E-mail:</label>
+        <input type="text" id="f4" placeholder="Enter Your E-mail..">
+
+        <label for="lname">Meetid:</label>
+        <input type="email" id="f5" placeholder="Enter Your Meeting ID..">
+
+        <label for="lname">Your Photo:</label>
+        <div style="padding:0; padding-bottom:6px;"></div>
+        <input type="file" id="img" accept="image/*">
+
+        <button id="btn" onclick="submit()">Submit</button>
+
+    </div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyADxqHtdT-9u3Ay3shemAcjrM4UlLAwgK4",
+            authDomain: "chatbot-5eb90.firebaseapp.com",
+            databaseURL: "https://chatbot-5eb90-default-rtdb.firebaseio.com",
+            projectId: "chatbot-5eb90",
+            storageBucket: "chatbot-5eb90.appspot.com",
+            messagingSenderId: "717612038808",
+            appId: "1:717612038808:web:036a0549f46c672d462eed"
+        };
+        firebase.initializeApp(firebaseConfig);
+        let imgF, d1, d2, d3, d4, d5;
+        const TimeStamp = new Date();
+        document.getElementById("img").addEventListener("change", function() {
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+                imgF = reader.result;
+            });
+            reader.readAsDataURL(this.files[0]);
+        })
+
+        function submit() {
+            d1 = document.getElementById("f1").value,
+                d2 = document.getElementById("f2").value,
+                d3 = document.getElementById("f3").value,
+                d4 = document.getElementById("f4").value,
+                d5 = document.getElementById("f5").value;
+            if (d1 == "" || d2 == "" || d3 == "" || d4 == "" || d5 == "" || imgF === undefined) {
+                window.alert("Please Fill all the Field");
+            } else {
+                uploaddata();
+            }
+        }
+
+
+        function uploaddata() {
+            document.getElementById("btn").innerHTML = "Please wait...";
+            firebase.database().ref('Theraphist/' + TimeStamp.getTime()).update({
+                name: d1,
+                location: d2,
+                detail: d3,
+                email: d4,
+                meetid: d5,
+                imglink: imgF,
+            }).then(function() {
+                firebase.database().ref('users/' + d5).update({
+                    Full_Name: d1 + "_Therapist",
+                    E_Mail: d4,
+                }).then(function() {
+                    window.alert("Your Response has been Submitted...");
+                    location.reload();
+                }).catch(function() {
+                    document.getElementById("btn").innerHTML = "Submit";
+                });;
+            }).catch(function() {
+                document.getElementById("btn").innerHTML = "Submit";
+            });
+        }
+    </script>
+</body>
+
+</html>

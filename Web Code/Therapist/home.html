@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot Meet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat');
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        background-color: #28223F;
+        font-family: Montserrat, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+    }
+    
+    h3 {
+        margin: 7px 0;
+    }
+    
+    .card-container {
+        background-color: #231E39;
+        border-radius: 5px;
+        box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+        color: #B3B8CD;
+        padding-top: 30px;
+        position: relative;
+        width: 350px;
+        max-width: 100%;
+    }
+    
+    button.primary {
+        background-color: #4903ed;
+        border: 1px solid #4903ed;
+        border-radius: 10px;
+        color: white;
+        font-family: Montserrat, sans-serif;
+        font-weight: bold;
+        padding: 10px 25px;
+        cursor: pointer;
+    }
+    
+    .upad {
+        margin: 0px 24px;
+        padding: 8px 0px;
+    }
+</style>
+
+<body>
+
+    <div class="card-container">
+        <div style="padding-bottom:3%; font-size:170%;text-align: center;"> <b>ChatBot</b></div>
+
+        <div style="text-align:center;"> <a href="/Video Call/index.html"><button class="primary">Video Call</button></a></div>
+        <br>
+        <div style="text-align:center;"> <a href="/ChatRoom/pages/home.html"><button class="primary">ChatRoom</button></a></div>
+        <br>
+        <div style="text-align:center;"> <button class="primary" onclick="LogOut()">Logout</button></div>
+        <br>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/api.js"></script>
+    <script>
+        function LogOut() {
+            localStorage.removeItem("MeetId");
+            localStorage.removeItem("Current_user");
+            localStorage.removeItem("Current_userID");
+            window.open("index.html", "_self");
+        }
+        if (localStorage.getItem("MeetId") === null) {
+            window.open("/index.html", "_self");
+        }
+    </script>
+    <script src="/notify.js"></script>
+</body>
+
+</html>

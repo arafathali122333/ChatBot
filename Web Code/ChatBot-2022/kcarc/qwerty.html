@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>⚙️ChatBot⚙️</title>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/loader.css">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/Checker.js"></script>
+</head>
+
+<body>
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+    <script>
+        firebase.database().ref().on('value', (snapshot) => {
+            let UIDDD = firebase.auth().currentUser.uid;
+            firebase.database().ref('MeetingSchedule/' + UIDDD).update({
+                Payment: "Success",
+            }).then(function() {
+                window.alert("Your request has been completed successfully!");
+                window.open("/BotChat/index.html", "_self");
+            })
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <title>ChatBot</title>
+    <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="Login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container" id="loginformdetails">
+        <div style="display:flex;" id="title">
+            <div class="title"><b>Log In</b>&ensp;</div>
+            <div><img src="img/logobot.gif" width="40" height="40" style="cursor:pointer;"></div>
+        </div>
+
+        <div class="content">
+
+            <div class="user-details" style="margin-top:5.5px;">
+                <div class="input-box">
+                    <span class="details"><b>Id</b></span>
+                    <input type="text" placeholder="Enter your Meetid/id" id="meet_field" required>
+                </div>
+            </div>
+            <br>
+            <div style="text-align:center; ">
+                <a style="text-decoration:none; padding:2.5% 8%; border-radius:30px; background-color:green; color:white; cursor:pointer;" id="loginbtn" onclick="login()">Sign In</a>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="/api.js"></script>
+    <script src="Login.js"></script>
+</body>
+
+</html>
