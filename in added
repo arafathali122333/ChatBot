@@ -1,0 +1,16 @@
+GoNative provides an end-to-end solution to deploy websites and web-based applications as native iOS and Android apps on mobile devices.Native Plugins enable you to easily add push notifications (e.g. OneSignal), biometric authentication (e.g. Face ID / Touch ID), in-app video calls (e.g. Twilio), and much more. Native Plugins require minimal web development using JavaScript to integrate to your site.
+‍it maintains core iOS and Android app codebases to ensure compatibility with future device and OS updates. Apps can be rebuilt in minutes with the latest updates, either using GoNative’s online app builder platform or by using local tools. This enables you to maintain your apps without maintaining any native code.
+
+Android Source Code link:
+https://drive.google.com/file/d/1IxVtpmeo-TLVL8ECyuSipmxEhnwb2OIa/view?usp=sharing
+
+Ios Source Code link:
+https://drive.google.com/file/d/1OuQdLm_olej0OuwPXmRioGWmX3q5zyAX/view?usp=sharing
+
+Meetid:
+1,  cfc5c34af9e145ebb9061e3a6278098a
+2,  05b4a952628645a5a08bb3709fcd2727
+3,  50ed47fe53594b4d84fb8bd6118b22e8
+
+Bug in ChatMeet:
+Hardcode in firebase database (MeetingSchedule=>value:"test");
