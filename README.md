@@ -3,12 +3,9 @@ Mental issues can hit anyone really hard. Mental health issues is an extremely c
 
 responsive webpages🤩🤩🤩
 
-https://chatbot-pro.netlify.app/
-😅
-
-https://therapy-chatbot.netlify.app/
-
-https://add-therapist-chatbot.netlify.app/
+* [ChatBot for Users](https://chatbot-webrun.netlify.app)
+* [ChatBot fot Therapist](https://chatbot-fortherapist.netlify.app)
+* [Add Therapist in ChatBot](https://chatbot-add-therapist.netlify.app)
 
 firebase database valid 1 month only😌😌😌
 
